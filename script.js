@@ -727,3 +727,242 @@ document.querySelectorAll('.example-btn').forEach(btn => {
         balanceBtn.click();
     });
 });
+
+
+const phConcentration = document.getElementById('ph-concentration');
+const phCalcBtn = document.getElementById('ph-calc-btn');
+const phResult = document.getElementById('ph-result');
+const phMarker = document.getElementById('ph-marker');
+
+phCalcBtn.addEventListener('click', () => {
+    const conc = parseFloat(phConcentration.value);
+    if (isNaN(conc) || conc <= 0) {
+        phResult.innerHTML = '<span style="color:#e74c3c">Enter a valid positive concentration</span>';
+        phMarker.style.display = 'none';
+        return;
+    }
+    
+    const ph = -Math.log10(conc);
+    const clampedPh = Math.max(0, Math.min(14, ph));
+    
+    let acidBase = '';
+    if (ph < 7) acidBase = '(Acidic)';
+    else if (ph > 7) acidBase = '(Basic)';
+    else acidBase = '(Neutral)';
+    
+    phResult.innerHTML = `<strong>pH = ${ph.toFixed(2)}</strong> ${acidBase}`;
+    phMarker.style.display = 'block';
+    phMarker.style.left = `${(clampedPh / 14) * 100}%`;
+});
+
+const dilutionCalcBtn = document.getElementById('dilution-calc-btn');
+const dilutionResult = document.getElementById('dilution-result');
+
+dilutionCalcBtn.addEventListener('click', () => {
+    const c1 = parseFloat(document.getElementById('c1').value);
+    const v1 = parseFloat(document.getElementById('v1').value);
+    const c2 = parseFloat(document.getElementById('c2').value);
+    const v2 = parseFloat(document.getElementById('v2').value);
+    
+    const filled = [!isNaN(c1), !isNaN(v1), !isNaN(c2), !isNaN(v2)];
+    const filledCount = filled.filter(Boolean).length;
+    
+    if (filledCount !== 3) {
+        dilutionResult.innerHTML = '<span style="color:#e74c3c">Fill exactly 3 values</span>';
+        return;
+    }
+    
+    let result = '';
+    if (isNaN(c1)) {
+        const calc = (c2 * v2) / v1;
+        result = `C1 = ${calc.toFixed(4)} M`;
+    } else if (isNaN(v1)) {
+        const calc = (c2 * v2) / c1;
+        result = `V1 = ${calc.toFixed(2)} mL`;
+    } else if (isNaN(c2)) {
+        const calc = (c1 * v1) / v2;
+        result = `C2 = ${calc.toFixed(4)} M`;
+    } else {
+        const calc = (c1 * v1) / c2;
+        result = `V2 = ${calc.toFixed(2)} mL`;
+    }
+    
+    dilutionResult.innerHTML = `<strong>${result}</strong>`;
+});
+
+const convertBtn = document.getElementById('convert-btn');
+const convertResult = document.getElementById('convert-result');
+
+convertBtn.addEventListener('click', () => {
+    const value = parseFloat(document.getElementById('convert-value').value);
+    const from = document.getElementById('convert-from').value;
+    const to = document.getElementById('convert-to').value;
+    const molarMass = parseFloat(document.getElementById('molar-mass-input').value);
+    
+    if (isNaN(value)) {
+        convertResult.innerHTML = '<span style="color:#e74c3c">Enter a value</span>';
+        return;
+    }
+    
+    const toGrams = { g: 1, kg: 1000, mg: 0.001, mol: molarMass, mmol: molarMass / 1000 };
+    const fromGrams = { g: 1, kg: 0.001, mg: 1000, mol: 1 / molarMass, mmol: 1000 / molarMass };
+    
+    if ((from === 'mol' || from === 'mmol' || to === 'mol' || to === 'mmol') && isNaN(molarMass)) {
+        convertResult.innerHTML = '<span style="color:#e74c3c">Enter molar mass for mole conversions</span>';
+        return;
+    }
+    
+    const grams = value * toGrams[from];
+    const result = grams * fromGrams[to];
+    
+    const units = { g: 'g', kg: 'kg', mg: 'mg', mol: 'mol', mmol: 'mmol' };
+    convertResult.innerHTML = `<strong>${value} ${units[from]} = ${result.toFixed(4)} ${units[to]}</strong>`;
+});
+
+const molarityCalcBtn = document.getElementById('molarity-calc-btn');
+const molarityResult = document.getElementById('molarity-result');
+
+molarityCalcBtn.addEventListener('click', () => {
+    const moles = parseFloat(document.getElementById('mol-solute').value);
+    const volume = parseFloat(document.getElementById('vol-solution').value);
+    
+    if (isNaN(moles) || isNaN(volume) || volume === 0) {
+        molarityResult.innerHTML = '<span style="color:#e74c3c">Enter valid values</span>';
+        return;
+    }
+    
+    const molarity = moles / volume;
+    molarityResult.innerHTML = `<strong>Molarity = ${molarity.toFixed(4)} M</strong>`;
+});
+
+
+const electronSelect = document.getElementById('electron-element-select');
+const shellsContainer = document.getElementById('shells-container');
+const nucleusDisplay = document.getElementById('nucleus-display');
+const electronConfigDisplay = document.getElementById('electron-config-display');
+
+elements.forEach(el => {
+    const opt = document.createElement('option');
+    opt.value = el.n;
+    opt.textContent = `${el.n}. ${el.name} (${el.s})`;
+    electronSelect.appendChild(opt);
+});
+
+function getShellElectrons(atomicNumber) {
+    const shells = [];
+    const maxPerShell = [2, 8, 18, 32, 32, 18, 8];
+    let remaining = atomicNumber;
+    
+    for (let i = 0; i < maxPerShell.length && remaining > 0; i++) {
+        const inShell = Math.min(remaining, maxPerShell[i]);
+        shells.push(inShell);
+        remaining -= inShell;
+    }
+    return shells;
+}
+
+function renderElectronShells(atomicNumber) {
+    const el = elements.find(e => e.n === atomicNumber);
+    if (!el) return;
+    
+    nucleusDisplay.textContent = el.s;
+    shellsContainer.innerHTML = '';
+    
+    const shells = getShellElectrons(atomicNumber);
+    const baseSize = 70;
+    const increment = 35;
+    
+    shells.forEach((electronCount, shellIndex) => {
+        const shellDiv = document.createElement('div');
+        shellDiv.className = 'electron-shell';
+        const size = baseSize + (shellIndex * increment * 2);
+        shellDiv.style.width = `${size}px`;
+        shellDiv.style.height = `${size}px`;
+        
+        for (let i = 0; i < electronCount; i++) {
+            const electron = document.createElement('div');
+            electron.className = 'electron';
+            const angle = (i / electronCount) * 2 * Math.PI;
+            const radius = size / 2;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            electron.style.left = `calc(50% + ${x}px - 6px)`;
+            electron.style.top = `calc(50% + ${y}px - 6px)`;
+            shellDiv.appendChild(electron);
+        }
+        
+        shellsContainer.appendChild(shellDiv);
+    });
+    
+    electronConfigDisplay.textContent = `Electron Configuration: ${el.ec}`;
+}
+
+electronSelect.addEventListener('change', () => {
+    renderElectronShells(parseInt(electronSelect.value));
+});
+
+renderElectronShells(1);
+
+const trendBtns = document.querySelectorAll('.trend-btn');
+const trendArrows = document.getElementById('trend-arrows');
+const trendExplanation = document.getElementById('trend-explanation');
+
+const trendData = {
+    none: {
+        arrows: '',
+        explanation: 'Select a trend to see how properties change across the periodic table.'
+    },
+    electronegativity: {
+        arrows: `
+            <div class="trend-arrow">
+                <div class="arrow-visual">→</div>
+                <div class="arrow-label">Increases across period</div>
+            </div>
+            <div class="trend-arrow">
+                <div class="arrow-visual">↑</div>
+                <div class="arrow-label">Increases up group</div>
+            </div>
+        `,
+        explanation: 'Electronegativity measures an atom\'s ability to attract electrons. It increases across a period (left to right) because the nuclear charge increases while atomic radius decreases. It decreases down a group because electrons are farther from the nucleus and more shielded.'
+    },
+    'atomic-radius': {
+        arrows: `
+            <div class="trend-arrow">
+                <div class="arrow-visual">←</div>
+                <div class="arrow-label">Decreases across period</div>
+            </div>
+            <div class="trend-arrow">
+                <div class="arrow-visual">↓</div>
+                <div class="arrow-label">Increases down group</div>
+            </div>
+        `,
+        explanation: 'Atomic radius decreases across a period because more protons pull electrons closer to the nucleus. It increases down a group because new electron shells are added, making the atom larger despite more protons.'
+    },
+    ionization: {
+        arrows: `
+            <div class="trend-arrow">
+                <div class="arrow-visual">→</div>
+                <div class="arrow-label">Increases across period</div>
+            </div>
+            <div class="trend-arrow">
+                <div class="arrow-visual">↑</div>
+                <div class="arrow-label">Increases up group</div>
+            </div>
+        `,
+        explanation: 'Ionization energy is the energy needed to remove an electron. It increases across a period because electrons are held more tightly by the increasing nuclear charge. It decreases down a group because outer electrons are farther from the nucleus and easier to remove.'
+    }
+};
+
+trendBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        trendBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const trend = btn.dataset.trend;
+        trendArrows.innerHTML = trendData[trend].arrows;
+        trendExplanation.textContent = trendData[trend].explanation;
+    });
+});
+
+trendArrows.innerHTML = trendData.none.arrows;
+trendExplanation.textContent = trendData.none.explanation;
