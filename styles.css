@@ -595,6 +595,17 @@ body.dark #quiz-score {
         gap: 1px;
         overflow-x: auto;
         max-width: 100%;
+        min-width: 320px;
+        padding-bottom: 10px;
+    }
+    
+    #table-container::-webkit-scrollbar {
+        height: 6px;
+    }
+    
+    #table-container::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 3px;
     }
     
     .element .symbol { font-size: 10px; }
@@ -744,34 +755,109 @@ body.dark #quiz-score {
 }
 
 @media (max-width: 480px) {
-    h1 { font-size: 18px; }
+    body { padding: 5px; }
+    
+    h1 { font-size: 16px; margin-bottom: 10px; }
     
     .element { 
         border-radius: 2px; 
     }
     
-    .element .symbol { font-size: 8px; }
-    .element .number { font-size: 5px; }
+    .element .symbol { font-size: 7px; }
+    .element .number { font-size: 4px; top: 1px; left: 1px; }
+    .element .state-indicator { width: 3px; height: 3px; bottom: 1px; right: 1px; }
     
-    .legend-item { 
-        font-size: 8px; 
-        padding: 2px 4px;
+    .legend { display: none; }
+    
+    .temp-slider-container { 
+        margin: 5px;
+        padding: 10px;
+        font-size: 12px;
     }
     
-    #element-info h2 { font-size: 18px; }
+    .state-legend { font-size: 10px; gap: 8px; }
+    .solid-dot, .liquid-dot, .gas-dot { width: 8px; height: 8px; }
     
-    .compare-card { padding: 10px; }
-    .compare-card h4 { font-size: 14px; }
-    .compare-card p { font-size: 12px; }
+    #element-info { 
+        margin: 5px; 
+        padding: 12px;
+        min-height: 100px;
+    }
+    #element-info h2 { font-size: 16px; }
+    #element-info .detail-item { font-size: 11px; }
+    #element-info .fun-fact { font-size: 11px; padding: 6px; }
+    #element-info .wiki-link { font-size: 12px; }
     
-    #balance-result .balanced-equation { 
+    #compare-section, #calculator, #equation-balancer { 
+        margin: 5px; 
+        padding: 12px;
+    }
+    
+    #compare-section h3, #calculator h3, #equation-balancer h3 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    .compare-card { padding: 8px; }
+    .compare-card h4 { font-size: 13px; }
+    .compare-card p { font-size: 11px; }
+    
+    #calculator input { font-size: 14px; padding: 10px; }
+    #calc-btn { font-size: 14px; padding: 10px; }
+    #calc-result { font-size: 14px; }
+    
+    .balancer-input input { 
         font-size: 14px; 
+        padding: 10px;
     }
     
+    #balance-btn { 
+        font-size: 14px; 
+        padding: 10px 20px;
+    }
+    
+    #balance-result { padding: 10px; }
+    #balance-result .balanced-equation { 
+        font-size: 12px;
+        padding: 8px;
+    }
+    #balance-result .count-item { 
+        padding: 4px 8px; 
+        font-size: 10px;
+    }
+    #balance-result .success { font-size: 12px; }
+    
+    .example-equations p { font-size: 11px; }
     .example-btn { 
         display: block;
         width: 100%;
-        margin: 5px 0;
+        margin: 4px 0;
+        padding: 8px;
+        font-size: 11px;
+    }
+    
+    .modal-content { 
+        padding: 15px; 
+        margin: 5px;
+        border-radius: 8px;
+    }
+    
+    #quiz-question { font-size: 14px; margin-bottom: 15px; }
+    #quiz-options button { padding: 10px; font-size: 12px; }
+    #quiz-score { font-size: 14px; }
+    
+    .close-btn { font-size: 24px; top: 5px; right: 10px; }
+}
+
+@media (max-width: 360px) {
+    h1 { font-size: 14px; }
+    
+    .element .symbol { font-size: 6px; }
+    .element .number { display: none; }
+    
+    .controls input, .controls select, .controls button {
+        padding: 10px;
+        font-size: 12px;
     }
 }
 
