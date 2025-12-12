@@ -550,3 +550,180 @@ container.addEventListener('keydown', (e) => {
 
 buildTable();
 updateComparison();
+
+
+const reactantsInput = document.getElementById('reactants');
+const productsInput = document.getElementById('products');
+const balanceBtn = document.getElementById('balance-btn');
+const balanceResult = document.getElementById('balance-result');
+
+function parseCompound(compound) {
+    compound = compound.trim();
+    const elements = {};
+    const regex = /([A-Z][a-z]?)(\d*)/g;
+    let match;
+    
+    while ((match = regex.exec(compound)) !== null) {
+        if (match[1]) {
+            const element = match[1];
+            const count = parseInt(match[2]) || 1;
+            elements[element] = (elements[element] || 0) + count;
+        }
+    }
+    return elements;
+}
+
+function parseEquationSide(side) {
+    const compounds = side.split('+').map(c => c.trim()).filter(c => c);
+    return compounds.map(c => ({
+        original: c,
+        elements: parseCompound(c)
+    }));
+}
+
+function multiplyElements(elements, coef) {
+    const result = {};
+    for (const el in elements) {
+        result[el] = elements[el] * coef;
+    }
+    return result;
+}
+
+function countElements(compounds, coefficients) {
+    const total = {};
+    compounds.forEach((compound, i) => {
+        const coef = coefficients[i];
+        for (const el in compound.elements) {
+            total[el] = (total[el] || 0) + compound.elements[el] * coef;
+        }
+    });
+    return total;
+}
+
+function arraysEqual(a, b) {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
+
+function isBalanced(reactants, products, rCoefs, pCoefs) {
+    const rCount = countElements(reactants, rCoefs);
+    const pCount = countElements(products, pCoefs);
+    
+    const allElements = new Set([...Object.keys(rCount), ...Object.keys(pCount)]);
+    for (const el of allElements) {
+        if ((rCount[el] || 0) !== (pCount[el] || 0)) return false;
+    }
+    return true;
+}
+
+function balanceEquation(reactantsStr, productsStr) {
+    const reactants = parseEquationSide(reactantsStr);
+    const products = parseEquationSide(productsStr);
+    
+    if (reactants.length === 0 || products.length === 0) {
+        return { success: false, error: 'Please enter both reactants and products' };
+    }
+    
+    const totalCompounds = reactants.length + products.length;
+    const maxCoef = 20;
+    
+    function* generateCoefficients(length, max) {
+        if (length === 1) {
+            for (let i = 1; i <= max; i++) yield [i];
+        } else {
+            for (let i = 1; i <= max; i++) {
+                for (const rest of generateCoefficients(length - 1, max)) {
+                    yield [i, ...rest];
+                }
+            }
+        }
+    }
+    
+    for (const allCoefs of generateCoefficients(totalCompounds, maxCoef)) {
+        const rCoefs = allCoefs.slice(0, reactants.length);
+        const pCoefs = allCoefs.slice(reactants.length);
+        
+        if (isBalanced(reactants, products, rCoefs, pCoefs)) {
+            const gcdVal = gcd(...allCoefs);
+            const simplifiedR = rCoefs.map(c => c / gcdVal);
+            const simplifiedP = pCoefs.map(c => c / gcdVal);
+            
+            return {
+                success: true,
+                reactants: reactants.map((r, i) => ({ ...r, coefficient: simplifiedR[i] })),
+                products: products.map((p, i) => ({ ...p, coefficient: simplifiedP[i] })),
+                rCoefs: simplifiedR,
+                pCoefs: simplifiedP
+            };
+        }
+    }
+    
+    return { success: false, error: 'Could not balance this equation. Check your input.' };
+}
+
+function gcd(...nums) {
+    const gcd2 = (a, b) => b === 0 ? a : gcd2(b, a % b);
+    return nums.reduce((a, b) => gcd2(a, b));
+}
+
+function formatCompound(compound, coef) {
+    const coefStr = coef === 1 ? '' : coef;
+    return `${coefStr}${compound}`;
+}
+
+function formatSubscripts(str) {
+    return str.replace(/(\d+)/g, '<sub>$1</sub>');
+}
+
+function displayBalancedEquation(result) {
+    if (!result.success) {
+        balanceResult.innerHTML = `<p class="error">${result.error}</p>`;
+        return;
+    }
+    
+    const reactantsSide = result.reactants
+        .map(r => formatCompound(r.original, r.coefficient))
+        .join(' + ');
+    
+    const productsSide = result.products
+        .map(p => formatCompound(p.original, p.coefficient))
+        .join(' + ');
+    
+    const equation = `${reactantsSide} → ${productsSide}`;
+    
+    const rCount = countElements(result.reactants.map(r => ({ elements: r.elements })), result.rCoefs);
+    
+    const elementCounts = Object.entries(rCount)
+        .map(([el, count]) => `<span class="count-item">${el}: ${count}</span>`)
+        .join('');
+    
+    balanceResult.innerHTML = `
+        <div class="balanced-equation">${formatSubscripts(equation)}</div>
+        <p class="success">✓ Equation balanced!</p>
+        <div class="element-count">${elementCounts}</div>
+    `;
+}
+
+balanceBtn.addEventListener('click', () => {
+    const result = balanceEquation(reactantsInput.value, productsInput.value);
+    displayBalancedEquation(result);
+});
+
+reactantsInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') balanceBtn.click();
+});
+
+productsInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') balanceBtn.click();
+});
+
+document.querySelectorAll('.example-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        reactantsInput.value = btn.dataset.r;
+        productsInput.value = btn.dataset.p;
+        balanceBtn.click();
+    });
+});
