@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Discovery Timeline</title>
+    <link rel="stylesheet" href="timeline.css">
+</head>
+<body>
+    <header>
+        <h1>Element Discovery Timeline</h1>
+        <p class="subtitle">The history of how we found the building blocks of matter</p>
+        <a href="index.html" class="back-link">Back to Periodic Table</a>
+    </header>
+
+    <div class="controls">
+        <input type="text" id="search" placeholder="Search elements or discoverers...">
+        <select id="era-filter">
+            <option value="all">All Eras</option>
+            <option value="ancient">Ancient (before 1700)</option>
+            <option value="1700s">1700s</option>
+            <option value="1800s">1800s</option>
+            <option value="1900s">1900s</option>
+            <option value="2000s">2000s</option>
+        </select>
+        <button id="dark-toggle">Dark Mode</button>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat">
+            <span class="stat-number" id="total-count">118</span>
+            <span class="stat-label">Elements</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number" id="ancient-count">0</span>
+            <span class="stat-label">Known in Ancient Times</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number" id="synthetic-count">0</span>
+            <span class="stat-label">Synthetic Elements</span>
+        </div>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        <div id="timeline"></div>
+    </div>
+
+    <script src="timeline.js"></script>
+</body>
+</html>
