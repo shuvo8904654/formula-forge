@@ -80,6 +80,25 @@
         <div id="calc-result"></div>
     </div>
 
+    <div id="equation-balancer">
+        <h3>⚖️ Chemical Equation Balancer</h3>
+        <div class="balancer-input">
+            <input type="text" id="reactants" placeholder="Reactants (e.g., H2 + O2)">
+            <span class="arrow">→</span>
+            <input type="text" id="products" placeholder="Products (e.g., H2O)">
+        </div>
+        <button id="balance-btn">Balance Equation</button>
+        <div id="balance-result"></div>
+        <div class="example-equations">
+            <p>Try these examples:</p>
+            <button class="example-btn" data-r="H2 + O2" data-p="H2O">H₂ + O₂ → H₂O</button>
+            <button class="example-btn" data-r="Fe + O2" data-p="Fe2O3">Fe + O₂ → Fe₂O₃</button>
+            <button class="example-btn" data-r="CH4 + O2" data-p="CO2 + H2O">CH₄ + O₂ → CO₂ + H₂O</button>
+            <button class="example-btn" data-r="Na + Cl2" data-p="NaCl">Na + Cl₂ → NaCl</button>
+            <button class="example-btn" data-r="Al + HCl" data-p="AlCl3 + H2">Al + HCl → AlCl₃ + H₂</button>
+        </div>
+    </div>
+
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
