@@ -1,0 +1,590 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #f4f1eb;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+    background: #1a1a2e;
+    color: #eee;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-weight: normal;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+body.dark h1 {
+    color: #ecf0f1;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.controls input, .controls select, .controls button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.controls button {
+    background: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.controls button:hover {
+    background: #2980b9;
+}
+
+body.dark .controls input, body.dark .controls select {
+    background: #2d2d44;
+    color: #eee;
+    border-color: #444;
+}
+
+.temp-slider-container {
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 8px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.dark .temp-slider-container {
+    background: rgba(255,255,255,0.05);
+}
+
+#temp-slider {
+    width: 200px;
+    margin: 0 10px;
+}
+
+.state-legend {
+    display: inline-flex;
+    gap: 15px;
+    margin-left: 15px;
+    font-size: 12px;
+}
+
+.solid-dot, .liquid-dot, .gas-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+.solid-dot { background: #555; }
+.liquid-dot { background: #3498db; }
+.gas-dot { background: #e74c3c; }
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.legend-item {
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+    color: #333;
+}
+
+#table-container {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    gap: 2px;
+    max-width: 1100px;
+    margin: 0 auto 30px;
+    outline: none;
+}
+
+.element {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.3s, filter 0.3s;
+    border: 1px solid rgba(0,0,0,0.1);
+    position: relative;
+    min-width: 0;
+    padding: 2px;
+}
+
+.element:hover {
+    transform: scale(1.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    z-index: 100;
+}
+
+.element.selected {
+    outline: 3px solid #e74c3c;
+}
+
+.element.dimmed {
+    opacity: 0.2;
+}
+
+.element.radioactive {
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px #2ecc71; }
+    50% { box-shadow: 0 0 15px #2ecc71, 0 0 25px #27ae60; }
+}
+
+.element .number {
+    font-size: 9px;
+    color: #555;
+    position: absolute;
+    top: 2px;
+    left: 3px;
+}
+
+.element .symbol {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+}
+
+.element .name {
+    font-size: 6px;
+    color: #666;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.element .state-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.element .state-indicator.solid { background: #555; }
+.element .state-indicator.liquid { background: #3498db; }
+.element .state-indicator.gas { background: #e74c3c; }
+
+body.dark .element .number { color: #aaa; }
+body.dark .element .symbol { color: #111; }
+body.dark .element .name { color: #444; }
+
+.placeholder {
+    visibility: hidden;
+}
+
+.alkali { background: #ffb3ba; }
+.alkaline { background: #ffdfba; }
+.transition { background: #ffffba; }
+.post-transition { background: #baffc9; }
+.metalloid { background: #bae1ff; }
+.nonmetal { background: #e2baff; }
+.halogen { background: #ffbaf3; }
+.noble { background: #d4baff; }
+.lanthanide { background: #ffd9ba; }
+.actinide { background: #c9ffba; }
+.unknown { background: #ddd; }
+
+#element-info {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    min-height: 120px;
+}
+
+body.dark #element-info {
+    background: #2d2d44;
+}
+
+#element-info h2 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-weight: normal;
+}
+
+body.dark #element-info h2 {
+    color: #ecf0f1;
+}
+
+#element-info p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+body.dark #element-info p {
+    color: #bbb;
+}
+
+#element-info .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+#element-info .detail-item {
+    font-size: 13px;
+}
+
+#element-info .detail-item span {
+    color: #888;
+}
+
+#element-info .electron-shells {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 5px;
+}
+
+#element-info .shell {
+    border: 2px solid #3498db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #3498db;
+}
+
+#element-info .wiki-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #3498db;
+    text-decoration: none;
+}
+
+#element-info .wiki-link:hover {
+    text-decoration: underline;
+}
+
+#element-info .fun-fact {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-left: 3px solid #3498db;
+    font-style: italic;
+    font-size: 13px;
+}
+
+body.dark #element-info .fun-fact {
+    background: #1a1a2e;
+}
+
+#compare-section, #calculator {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+body.dark #compare-section, body.dark #calculator {
+    background: #2d2d44;
+}
+
+#compare-section h3, #calculator h3 {
+    margin-bottom: 15px;
+    font-weight: normal;
+    color: #2c3e50;
+}
+
+body.dark #compare-section h3, body.dark #calculator h3 {
+    color: #ecf0f1;
+}
+
+.compare-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.compare-controls select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-width: 150px;
+}
+
+body.dark .compare-controls select {
+    background: #1a1a2e;
+    color: #eee;
+    border-color: #444;
+}
+
+#compare-result {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.compare-card {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+body.dark .compare-card {
+    background: #1a1a2e;
+}
+
+.compare-card h4 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+body.dark .compare-card h4 {
+    color: #ecf0f1;
+}
+
+.compare-card p {
+    font-size: 13px;
+    margin: 5px 0;
+    color: #555;
+}
+
+body.dark .compare-card p {
+    color: #bbb;
+}
+
+#calculator input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+body.dark #calculator input {
+    background: #1a1a2e;
+    color: #eee;
+    border-color: #444;
+}
+
+#calc-btn {
+    padding: 10px 20px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#calc-btn:hover {
+    background: #2980b9;
+}
+
+#calc-result {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+body.dark #calc-result {
+    color: #ecf0f1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+body.dark .modal-content {
+    background: #2d2d44;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #888;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+body.dark .close-btn:hover {
+    color: #eee;
+}
+
+#modal-body h2 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+body.dark #modal-body h2 {
+    color: #ecf0f1;
+}
+
+#modal-body p {
+    margin: 8px 0;
+    color: #555;
+}
+
+body.dark #modal-body p {
+    color: #bbb;
+}
+
+.quiz-content {
+    text-align: center;
+}
+
+.quiz-content h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+body.dark .quiz-content h2 {
+    color: #ecf0f1;
+}
+
+#quiz-question {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+body.dark #quiz-question {
+    color: #eee;
+}
+
+#quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+#quiz-options button {
+    padding: 15px;
+    border: 2px solid #3498db;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+body.dark #quiz-options button {
+    background: #1a1a2e;
+    color: #eee;
+}
+
+#quiz-options button:hover {
+    background: #3498db;
+    color: white;
+}
+
+#quiz-options button.correct {
+    background: #2ecc71;
+    border-color: #2ecc71;
+    color: white;
+}
+
+#quiz-options button.wrong {
+    background: #e74c3c;
+    border-color: #e74c3c;
+    color: white;
+}
+
+#quiz-score {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+body.dark #quiz-score {
+    color: #bbb;
+}
+
+@media (max-width: 800px) {
+    #table-container { gap: 1px; }
+    .element .symbol { font-size: 12px; }
+    .element .name { display: none; }
+    .element .number { font-size: 7px; }
+    .controls { flex-direction: column; align-items: center; }
+    #compare-result { grid-template-columns: 1fr; }
+}
+
+@media print {
+    .controls, .temp-slider-container, #element-info, #compare-section, #calculator { display: none; }
+    body { background: white; }
+    .element:hover { transform: none; box-shadow: none; }
+}

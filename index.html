@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic Table</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>The Periodic Table of Elements</h1>
+        <div class="controls">
+            <input type="text" id="search" placeholder="Search elements...">
+            <select id="category-filter">
+                <option value="all">All Categories</option>
+                <option value="alkali">Alkali Metals</option>
+                <option value="alkaline">Alkaline Earth</option>
+                <option value="transition">Transition Metals</option>
+                <option value="post-transition">Post-Transition</option>
+                <option value="metalloid">Metalloids</option>
+                <option value="nonmetal">Nonmetals</option>
+                <option value="halogen">Halogens</option>
+                <option value="noble">Noble Gases</option>
+                <option value="lanthanide">Lanthanides</option>
+                <option value="actinide">Actinides</option>
+            </select>
+            <select id="view-mode">
+                <option value="default">Default View</option>
+                <option value="electronegativity">Electronegativity</option>
+                <option value="atomic-radius">Atomic Radius</option>
+            </select>
+            <button id="dark-toggle">🌙 Dark Mode</button>
+            <button id="quiz-btn">🎯 Quiz Mode</button>
+        </div>
+    </header>
+    
+    <div class="temp-slider-container">
+        <label>Temperature: <span id="temp-value">298</span> K</label>
+        <input type="range" id="temp-slider" min="0" max="6000" value="298">
+        <span class="state-legend">
+            <span class="solid-dot"></span> Solid
+            <span class="liquid-dot"></span> Liquid
+            <span class="gas-dot"></span> Gas
+        </span>
+    </div>
+
+    <div class="legend">
+        <span class="legend-item alkali">Alkali Metals</span>
+        <span class="legend-item alkaline">Alkaline Earth</span>
+        <span class="legend-item transition">Transition Metals</span>
+        <span class="legend-item post-transition">Post-Transition</span>
+        <span class="legend-item metalloid">Metalloids</span>
+        <span class="legend-item nonmetal">Nonmetals</span>
+        <span class="legend-item halogen">Halogens</span>
+        <span class="legend-item noble">Noble Gases</span>
+        <span class="legend-item lanthanide">Lanthanides</span>
+        <span class="legend-item actinide">Actinides</span>
+    </div>
+
+    <div id="table-container" tabindex="0"></div>
+    
+    <div id="element-info">
+        <p>Hover over an element to see details</p>
+    </div>
+
+    <div id="compare-section">
+        <h3>Compare Elements</h3>
+        <div class="compare-controls">
+            <select id="compare1"></select>
+            <span>vs</span>
+            <select id="compare2"></select>
+        </div>
+        <div id="compare-result"></div>
+    </div>
+
+    <div id="calculator">
+        <h3>Molar Mass Calculator</h3>
+        <input type="text" id="formula-input" placeholder="Enter formula (e.g., H2O, NaCl)">
+        <button id="calc-btn">Calculate</button>
+        <div id="calc-result"></div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content quiz-content">
+            <span class="close-btn">&times;</span>
+            <h2>Element Quiz</h2>
+            <div id="quiz-question"></div>
+            <div id="quiz-options"></div>
+            <div id="quiz-score"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
