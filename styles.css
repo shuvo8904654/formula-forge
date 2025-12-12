@@ -574,13 +574,193 @@ body.dark #quiz-score {
     color: #bbb;
 }
 
-@media (max-width: 800px) {
-    #table-container { gap: 1px; }
-    .element .symbol { font-size: 12px; }
+@media (max-width: 900px) {
+    body { padding: 10px; }
+    
+    h1 { font-size: 22px; }
+    
+    #table-container { 
+        gap: 1px;
+        overflow-x: auto;
+        max-width: 100%;
+    }
+    
+    .element .symbol { font-size: 10px; }
     .element .name { display: none; }
-    .element .number { font-size: 7px; }
-    .controls { flex-direction: column; align-items: center; }
+    .element .number { font-size: 6px; }
+    .element .state-indicator { width: 4px; height: 4px; }
+    
+    .controls { 
+        flex-direction: column; 
+        align-items: stretch;
+        padding: 0 10px;
+    }
+    
+    .controls input, .controls select, .controls button {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .legend { 
+        gap: 5px; 
+        padding: 0 10px;
+    }
+    
+    .legend-item { 
+        font-size: 9px; 
+        padding: 3px 6px;
+    }
+    
+    .temp-slider-container {
+        padding: 15px 10px;
+        margin: 10px;
+    }
+    
+    .temp-slider-container label { 
+        display: block; 
+        margin-bottom: 10px; 
+    }
+    
+    #temp-slider { 
+        width: 100%; 
+        margin: 10px 0;
+    }
+    
+    .state-legend { 
+        display: flex;
+        justify-content: center;
+        margin-left: 0; 
+        margin-top: 10px;
+    }
+    
+    #element-info { 
+        margin: 10px; 
+        padding: 15px;
+    }
+    
+    #element-info .detail-grid { 
+        grid-template-columns: 1fr; 
+        gap: 5px;
+    }
+    
+    #element-info .detail-item { font-size: 12px; }
+    
+    #element-info .fun-fact { 
+        font-size: 12px; 
+        padding: 8px;
+    }
+    
+    #compare-section, #calculator, #equation-balancer { 
+        margin: 10px; 
+        padding: 15px;
+    }
+    
     #compare-result { grid-template-columns: 1fr; }
+    
+    .compare-controls { 
+        flex-direction: column; 
+        gap: 10px;
+    }
+    
+    .compare-controls select { 
+        width: 100%; 
+        min-width: unset;
+    }
+    
+    #calculator input { 
+        width: 100%; 
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    #calc-btn { 
+        width: 100%; 
+    }
+    
+    .modal-content { 
+        padding: 20px; 
+        margin: 10px;
+        max-height: 90vh;
+    }
+    
+    #quiz-options { 
+        grid-template-columns: 1fr; 
+    }
+    
+    #quiz-options button { 
+        padding: 12px; 
+    }
+    
+    .balancer-input { 
+        flex-direction: column; 
+        gap: 10px;
+    }
+    
+    .balancer-input input { 
+        width: 100%; 
+    }
+    
+    .balancer-input .arrow { 
+        transform: rotate(90deg); 
+    }
+    
+    #balance-result .balanced-equation { 
+        font-size: 16px; 
+        padding: 10px;
+        word-break: break-all;
+    }
+    
+    #balance-result .element-count { 
+        gap: 10px; 
+    }
+    
+    #balance-result .count-item { 
+        padding: 5px 10px; 
+        font-size: 12px;
+    }
+    
+    .example-equations { 
+        padding-top: 15px; 
+    }
+    
+    .example-btn { 
+        padding: 10px 8px; 
+        font-size: 11px;
+        margin: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 18px; }
+    
+    .element { 
+        border-radius: 2px; 
+    }
+    
+    .element .symbol { font-size: 8px; }
+    .element .number { font-size: 5px; }
+    
+    .legend-item { 
+        font-size: 8px; 
+        padding: 2px 4px;
+    }
+    
+    #element-info h2 { font-size: 18px; }
+    
+    .compare-card { padding: 10px; }
+    .compare-card h4 { font-size: 14px; }
+    .compare-card p { font-size: 12px; }
+    
+    #balance-result .balanced-equation { 
+        font-size: 14px; 
+    }
+    
+    .example-btn { 
+        display: block;
+        width: 100%;
+        margin: 5px 0;
+    }
 }
 
 @media print {
