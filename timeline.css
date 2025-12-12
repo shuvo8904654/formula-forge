@@ -1,0 +1,355 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #f4f1eb;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+    background: #1a1a2e;
+    color: #eee;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #2c3e50;
+    font-weight: normal;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+body.dark h1 {
+    color: #ecf0f1;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+body.dark .subtitle {
+    color: #aaa;
+}
+
+.back-link {
+    display: inline-block;
+    color: #3498db;
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid #3498db;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.back-link:hover {
+    background: #3498db;
+    color: white;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.controls input, .controls select, .controls button {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+body.dark .controls input, body.dark .controls select {
+    background: #2d2d44;
+    color: #eee;
+    border-color: #444;
+}
+
+.controls button {
+    background: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background: #2980b9;
+}
+
+.stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 32px;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #666;
+}
+
+body.dark .stat-label {
+    color: #aaa;
+}
+
+
+.timeline-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #3498db, #9b59b6, #e74c3c);
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    width: 45%;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+body.dark .timeline-item {
+    background: #2d2d44;
+}
+
+.timeline-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+}
+
+.timeline-item.left {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.timeline-item.right {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    width: 16px;
+    height: 16px;
+    background: #3498db;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 3px #3498db;
+}
+
+body.dark .timeline-item::before {
+    border-color: #1a1a2e;
+}
+
+.timeline-item.left::before {
+    right: -8%;
+}
+
+.timeline-item.right::before {
+    left: -8%;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    width: 30px;
+    height: 3px;
+    background: #3498db;
+}
+
+.timeline-item.left::after {
+    right: -7%;
+}
+
+.timeline-item.right::after {
+    left: -7%;
+}
+
+.timeline-year {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.timeline-year.ancient {
+    background: #8e44ad;
+}
+
+.timeline-year.era-1700s {
+    background: #27ae60;
+}
+
+.timeline-year.era-1800s {
+    background: #e67e22;
+}
+
+.timeline-year.era-1900s {
+    background: #e74c3c;
+}
+
+.timeline-year.era-2000s {
+    background: #1abc9c;
+}
+
+.element-symbol {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-right: 15px;
+    float: left;
+}
+
+.element-name {
+    font-size: 20px;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+body.dark .element-name {
+    color: #ecf0f1;
+}
+
+.element-number {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.discoverer {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+body.dark .discoverer {
+    color: #bbb;
+}
+
+.discovery-story {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    clear: both;
+    padding-top: 10px;
+}
+
+body.dark .discovery-story {
+    color: #aaa;
+}
+
+.alkali { background: #ffb3ba; color: #333; }
+.alkaline { background: #ffdfba; color: #333; }
+.transition { background: #ffffba; color: #333; }
+.post-transition { background: #baffc9; color: #333; }
+.metalloid { background: #bae1ff; color: #333; }
+.nonmetal { background: #e2baff; color: #333; }
+.halogen { background: #ffbaf3; color: #333; }
+.noble { background: #d4baff; color: #333; }
+.lanthanide { background: #ffd9ba; color: #333; }
+.actinide { background: #c9ffba; color: #333; }
+.unknown { background: #ddd; color: #333; }
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .timeline-line {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        width: calc(100% - 50px);
+        margin-left: 50px !important;
+        margin-right: 0 !important;
+    }
+    
+    .timeline-item::before {
+        left: -38px !important;
+        right: auto !important;
+    }
+    
+    .timeline-item::after {
+        left: -30px !important;
+        right: auto !important;
+        width: 20px;
+    }
+    
+    .stats-bar {
+        gap: 20px;
+    }
+    
+    .stat-number {
+        font-size: 24px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 10px;
+    }
+    
+    .controls input, .controls select, .controls button {
+        width: 100%;
+    }
+    
+    h1 {
+        font-size: 22px;
+    }
+}
