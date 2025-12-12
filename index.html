@@ -94,13 +94,100 @@
         <div id="balance-result"></div>
         <div class="example-equations">
             <p>Try these examples:</p>
-            <button class="example-btn" data-r="H2 + O2" data-p="H2O">H₂ + O₂ → H₂O</button>
-            <button class="example-btn" data-r="Fe + O2" data-p="Fe2O3">Fe + O₂ → Fe₂O₃</button>
-            <button class="example-btn" data-r="CH4 + O2" data-p="CO2 + H2O">CH₄ + O₂ → CO₂ + H₂O</button>
-            <button class="example-btn" data-r="Na + Cl2" data-p="NaCl">Na + Cl₂ → NaCl</button>
-            <button class="example-btn" data-r="Al + HCl" data-p="AlCl3 + H2">Al + HCl → AlCl₃ + H₂</button>
+            <button class="example-btn" data-r="H2 + O2" data-p="H2O">H2 + O2 → H2O</button>
+            <button class="example-btn" data-r="Fe + O2" data-p="Fe2O3">Fe + O2 → Fe2O3</button>
+            <button class="example-btn" data-r="CH4 + O2" data-p="CO2 + H2O">CH4 + O2 → CO2 + H2O</button>
+            <button class="example-btn" data-r="Na + Cl2" data-p="NaCl">Na + Cl2 → NaCl</button>
+            <button class="example-btn" data-r="Al + HCl" data-p="AlCl3 + H2">Al + HCl → AlCl3 + H2</button>
         </div>
     </div>
+
+    <div class="tools-section">
+        <h3>Chemistry Tools</h3>
+        <div class="tools-grid">
+            <div class="tool-card" id="ph-tool">
+                <h4>pH Calculator</h4>
+                <input type="number" id="ph-concentration" placeholder="H+ concentration (M)" step="any">
+                <button id="ph-calc-btn">Calculate pH</button>
+                <div id="ph-result"></div>
+                <div class="ph-scale">
+                    <div class="ph-bar"></div>
+                    <div class="ph-marker" id="ph-marker"></div>
+                    <div class="ph-labels">
+                        <span>0</span><span>7</span><span>14</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card" id="dilution-tool">
+                <h4>Dilution Calculator</h4>
+                <p class="tool-formula">C1V1 = C2V2</p>
+                <div class="dilution-inputs">
+                    <input type="number" id="c1" placeholder="C1 (M)" step="any">
+                    <input type="number" id="v1" placeholder="V1 (mL)" step="any">
+                    <input type="number" id="c2" placeholder="C2 (M)" step="any">
+                    <input type="number" id="v2" placeholder="V2 (mL)" step="any">
+                </div>
+                <button id="dilution-calc-btn">Calculate Missing</button>
+                <div id="dilution-result"></div>
+            </div>
+
+            <div class="tool-card" id="unit-converter">
+                <h4>Unit Converter</h4>
+                <input type="number" id="convert-value" placeholder="Enter value" step="any">
+                <select id="convert-from">
+                    <option value="g">Grams (g)</option>
+                    <option value="kg">Kilograms (kg)</option>
+                    <option value="mg">Milligrams (mg)</option>
+                    <option value="mol">Moles (mol)</option>
+                    <option value="mmol">Millimoles (mmol)</option>
+                </select>
+                <span class="convert-arrow">→</span>
+                <select id="convert-to">
+                    <option value="mol">Moles (mol)</option>
+                    <option value="g">Grams (g)</option>
+                    <option value="kg">Kilograms (kg)</option>
+                    <option value="mg">Milligrams (mg)</option>
+                    <option value="mmol">Millimoles (mmol)</option>
+                </select>
+                <input type="number" id="molar-mass-input" placeholder="Molar mass (g/mol)" step="any">
+                <button id="convert-btn">Convert</button>
+                <div id="convert-result"></div>
+            </div>
+
+            <div class="tool-card" id="molarity-tool">
+                <h4>Molarity Calculator</h4>
+                <div class="molarity-inputs">
+                    <input type="number" id="mol-solute" placeholder="Moles of solute" step="any">
+                    <input type="number" id="vol-solution" placeholder="Volume (L)" step="any">
+                </div>
+                <button id="molarity-calc-btn">Calculate Molarity</button>
+                <div id="molarity-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="electron-viewer">
+        <h3>Electron Shell Viewer</h3>
+        <select id="electron-element-select"></select>
+        <div class="electron-display">
+            <div class="nucleus" id="nucleus-display"></div>
+            <div class="shells-container" id="shells-container"></div>
+        </div>
+        <div id="electron-config-display"></div>
+    </div>
+
+    <div id="trends-section">
+        <h3>Periodic Trends</h3>
+        <div class="trends-buttons">
+            <button class="trend-btn active" data-trend="none">None</button>
+            <button class="trend-btn" data-trend="electronegativity">Electronegativity</button>
+            <button class="trend-btn" data-trend="atomic-radius">Atomic Radius</button>
+            <button class="trend-btn" data-trend="ionization">Ionization Energy</button>
+        </div>
+        <div class="trend-arrows" id="trend-arrows"></div>
+        <div class="trend-explanation" id="trend-explanation"></div>
+    </div>button a
 
     <div id="modal" class="modal">
         <div class="modal-content">
