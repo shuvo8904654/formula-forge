@@ -235,7 +235,7 @@ function buildTable() {
 function showInfo(el) {
     const shells = el.ec.replace(/\[.*?\]\s*/, '').split(' ');
     infoPanel.innerHTML = `
-        <h2>${el.name} (${el.s}) ${el.radio ? '☢️' : ''}</h2>
+        <h2>${el.name} (${el.s}) ${el.radio ? '[Radioactive]' : ''}</h2>
         <div class="detail-grid">
             <div class="detail-item"><span>Atomic Number:</span> ${el.n}</div>
             <div class="detail-item"><span>Atomic Mass:</span> ${el.m} u</div>
@@ -246,8 +246,8 @@ function showInfo(el) {
             <div class="detail-item"><span>Boiling Point:</span> ${el.bp || 'N/A'} K</div>
             <div class="detail-item"><span>Electron Config:</span> ${el.ec}</div>
         </div>
-        <div class="fun-fact">💡 ${el.fact}</div>
-        <a class="wiki-link" href="https://en.wikipedia.org/wiki/${el.name}" target="_blank">📖 Learn more on Wikipedia</a>
+        <div class="fun-fact">${el.fact}</div>
+        <a class="wiki-link" href="https://en.wikipedia.org/wiki/${el.name}" target="_blank">Learn more on Wikipedia</a>
     `;
 }
 
@@ -262,10 +262,10 @@ function showModal(el) {
         <p><strong>Atomic Radius:</strong> ${el.r} pm</p>
         <p><strong>Melting Point:</strong> ${el.mp || 'N/A'} K</p>
         <p><strong>Boiling Point:</strong> ${el.bp || 'N/A'} K</p>
-        <p><strong>Radioactive:</strong> ${el.radio ? 'Yes ☢️' : 'No'}</p>
+        <p><strong>Radioactive:</strong> ${el.radio ? 'Yes' : 'No'}</p>
         <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
         <p><strong>Fun Fact:</strong> ${el.fact}</p>
-        <a class="wiki-link" href="https://en.wikipedia.org/wiki/${el.name}" target="_blank">📖 Read more on Wikipedia</a>
+        <a class="wiki-link" href="https://en.wikipedia.org/wiki/${el.name}" target="_blank">Read more on Wikipedia</a>
     `;
     modal.classList.add('active');
 }
@@ -332,7 +332,7 @@ function updateTemperature() {
 
 darkToggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
-    darkToggle.textContent = document.body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    darkToggle.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
 });
 
 searchInput.addEventListener('input', filterElements);
@@ -702,7 +702,7 @@ function displayBalancedEquation(result) {
     
     balanceResult.innerHTML = `
         <div class="balanced-equation">${formatSubscripts(equation)}</div>
-        <p class="success">✓ Equation balanced!</p>
+        <p class="success">Equation balanced!</p>
         <div class="element-count">${elementCounts}</div>
     `;
 }
