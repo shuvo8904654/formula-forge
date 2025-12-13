@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solubility Table</title>
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <header>
+        <h1>Solubility Table</h1>
+        <p class="subtitle">Solubility of common ionic compounds in water</p>
+        <a href="index.html" class="back-link">Back to Periodic Table</a>
+    </header>
+
+    <div class="controls">
+        <button id="dark-toggle">Dark Mode</button>
+    </div>
+
+    <div class="content-section">
+        <div class="legend-box">
+            <div class="legend-item">
+                <div class="legend-color soluble"></div>
+                <span>Soluble</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color slightly"></div>
+                <span>Slightly Soluble</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color insoluble"></div>
+                <span>Insoluble</span>
+            </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+            <table class="solubility-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Na+</th>
+                        <th>K+</th>
+                        <th>NH4+</th>
+                        <th>Ca2+</th>
+                        <th>Mg2+</th>
+                        <th>Ba2+</th>
+                        <th>Fe2+</th>
+                        <th>Fe3+</th>
+                        <th>Cu2+</th>
+                        <th>Zn2+</th>
+                        <th>Ag+</th>
+                        <th>Pb2+</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Cl-</th>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="insoluble">I</td>
+                        <td class="slightly">SS</td>
+                    </tr>
+                    <tr>
+                        <th>Br-</th>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="insoluble">I</td>
+                        <td class="slightly">SS</td>
+                    </tr>
+                    <tr>
+                        <th>I-</th>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="soluble">S</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                    </tr>
+                    <tr>
+                        <th>NO3-</th>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                    </tr>
+                    <tr>
+                        <th>SO4 2-</th>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="slightly">SS</td>
+                        <td class="soluble">S</td>
+                        <td class="insoluble">I</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="slightly">SS</td>
+                        <td class="insoluble">I</td>
+                    </tr>
+                    <tr>
+                        <th>CO3 2-</th>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                    </tr>
+                    <tr>
+                        <th>PO4 3-</th>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                    </tr>
+                    <tr>
+                        <th>OH-</th>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="slightly">SS</td>
+                        <td class="insoluble">I</td>
+                        <td class="soluble">S</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                    </tr>
+                    <tr>
+                        <th>S 2-</th>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="soluble">S</td>
+                        <td class="slightly">SS</td>
+                        <td class="insoluble">I</td>
+                        <td class="soluble">S</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                        <td class="insoluble">I</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="facts-section">
+        <h3>Solubility Rules</h3>
+        <ul>
+            <li>All nitrates (NO3-) are soluble</li>
+            <li>All compounds of alkali metals (Na+, K+, etc.) are soluble</li>
+            <li>All ammonium (NH4+) compounds are soluble</li>
+            <li>Most chlorides, bromides, and iodides are soluble, except Ag+, Pb2+, Hg2 2+</li>
+            <li>Most sulfates are soluble, except Ba2+, Pb2+, Ca2+ (slightly)</li>
+            <li>Most hydroxides are insoluble, except alkali metals and Ba2+</li>
+            <li>Most carbonates, phosphates, and sulfides are insoluble, except alkali metals and NH4+</li>
+        </ul>
+    </div>
+
+    <script>
+        document.getElementById('dark-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark');
+            this.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+        });
+    </script>
+</body>
+</html>

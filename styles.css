@@ -1692,3 +1692,36 @@ body.dark .oxidation-rules ul {
         padding: 10px 12px;
     }
 }
+
+
+.abundance-link {
+    background: #e67e22;
+}
+
+.abundance-link:hover {
+    background: #d35400;
+}
+
+.isotopes-link {
+    background: #1abc9c;
+}
+
+.isotopes-link:hover {
+    background: #16a085;
+}
+
+.safety-link {
+    background: #e74c3c;
+}
+
+.safety-link:hover {
+    background: #c0392b;
+}
+
+.solubility-link {
+    background: #3498db;
+}
+
+.solubility-link:hover {
+    background: #2980b9;
+}

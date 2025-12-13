@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Safety Reference</title>
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <header>
+        <h1>Lab Safety Reference</h1>
+        <p class="subtitle">Essential safety information for working with chemicals</p>
+        <a href="index.html" class="back-link">Back to Periodic Table</a>
+    </header>
+
+    <div class="controls">
+        <button id="dark-toggle">Dark Mode</button>
+    </div>
+
+    <div class="content-section">
+        <div class="safety-category danger">
+            <h4>Highly Dangerous Elements</h4>
+            <ul>
+                <li><strong>Fluorine (F)</strong> - Extremely reactive, toxic gas. Can cause severe burns.</li>
+                <li><strong>Chlorine (Cl)</strong> - Toxic gas, respiratory irritant. Used in WWI as chemical weapon.</li>
+                <li><strong>Mercury (Hg)</strong> - Toxic heavy metal. Vapors are dangerous. Causes neurological damage.</li>
+                <li><strong>Lead (Pb)</strong> - Cumulative poison. Causes developmental issues, especially in children.</li>
+                <li><strong>Arsenic (As)</strong> - Highly toxic. Historical poison of choice.</li>
+                <li><strong>Thallium (Tl)</strong> - Extremely toxic. Once used as rat poison.</li>
+                <li><strong>Plutonium (Pu)</strong> - Radioactive, toxic. Alpha emitter dangerous if inhaled.</li>
+                <li><strong>Polonium (Po)</strong> - Intensely radioactive. Used in assassination of Alexander Litvinenko.</li>
+            </ul>
+        </div>
+
+        <div class="safety-category warning">
+            <h4>Handle with Caution</h4>
+            <ul>
+                <li><strong>Sodium (Na)</strong> - Reacts violently with water. Store under oil.</li>
+                <li><strong>Potassium (K)</strong> - More reactive than sodium. Explosive with water.</li>
+                <li><strong>Phosphorus (P)</strong> - White phosphorus ignites spontaneously in air.</li>
+                <li><strong>Bromine (Br)</strong> - Corrosive liquid, toxic vapors. Causes severe burns.</li>
+                <li><strong>Cesium (Cs)</strong> - Explodes on contact with water. Most reactive alkali metal.</li>
+                <li><strong>Beryllium (Be)</strong> - Dust is highly toxic. Causes berylliosis.</li>
+                <li><strong>Cadmium (Cd)</strong> - Toxic heavy metal. Accumulates in kidneys.</li>
+                <li><strong>Chromium (Cr)</strong> - Hexavalent chromium is carcinogenic.</li>
+            </ul>
+        </div>
+
+        <div class="safety-category info">
+            <h4>General Lab Safety Rules</h4>
+            <ul>
+                <li>Always wear appropriate PPE: safety glasses, lab coat, gloves</li>
+                <li>Know the location of safety equipment: eyewash, shower, fire extinguisher</li>
+                <li>Never eat, drink, or apply cosmetics in the lab</li>
+                <li>Read Safety Data Sheets (SDS) before handling any chemical</li>
+                <li>Never smell chemicals directly - waft vapors toward nose</li>
+                <li>Add acid to water, never water to acid</li>
+                <li>Label all containers clearly</li>
+                <li>Dispose of chemicals properly - never down the drain</li>
+                <li>Work in a fume hood when handling volatile substances</li>
+                <li>Never work alone in the lab</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h3>Hazard Symbols</h3>
+        <div class="grid-2">
+            <div class="card">
+                <h4>Flammable</h4>
+                <p>Substances that can catch fire easily. Keep away from heat, sparks, and open flames.</p>
+            </div>
+            <div class="card">
+                <h4>Oxidizer</h4>
+                <p>Can cause or intensify fire. Keep away from flammable materials.</p>
+            </div>
+            <div class="card">
+                <h4>Corrosive</h4>
+                <p>Can cause severe skin burns and eye damage. Handle with appropriate protection.</p>
+            </div>
+            <div class="card">
+                <h4>Toxic</h4>
+                <p>Can cause death or serious health effects. Avoid all contact and inhalation.</p>
+            </div>
+            <div class="card">
+                <h4>Irritant</h4>
+                <p>May cause skin or eye irritation. Use appropriate protection.</p>
+            </div>
+            <div class="card">
+                <h4>Radioactive</h4>
+                <p>Emits ionizing radiation. Requires special handling and shielding.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('dark-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark');
+            this.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+        });
+    </script>
+</body>
+</html>
