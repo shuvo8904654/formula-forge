@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Abundance</title>
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <header>
+        <h1>Element Abundance</h1>
+        <p class="subtitle">How common are elements in different environments?</p>
+        <a href="index.html" class="back-link">Back to Periodic Table</a>
+    </header>
+
+    <div class="controls">
+        <select id="location-select">
+            <option value="universe">Universe</option>
+            <option value="earth-crust">Earth's Crust</option>
+            <option value="ocean">Ocean</option>
+            <option value="human">Human Body</option>
+            <option value="atmosphere">Atmosphere</option>
+        </select>
+        <button id="dark-toggle">Dark Mode</button>
+    </div>
+
+    <div class="chart-container">
+        <h3 id="chart-title">Abundance in the Universe</h3>
+        <div id="abundance-chart"></div>
+    </div>
+
+    <div class="facts-section">
+        <h3>Interesting Facts</h3>
+        <div id="facts-content"></div>
+    </div>
+
+    <script src="abundance.js"></script>
+</body>
+</html>
