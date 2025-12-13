@@ -1114,3 +1114,155 @@ document.querySelectorAll('.ox-example-btn').forEach(btn => {
         oxidationBtn.click();
     });
 });
+
+
+const R = 0.0821;
+
+const gasCalcBtn = document.getElementById('gas-calc-btn');
+const gasResult = document.getElementById('gas-result');
+
+gasCalcBtn.addEventListener('click', () => {
+    const p = parseFloat(document.getElementById('gas-p').value);
+    const v = parseFloat(document.getElementById('gas-v').value);
+    const n = parseFloat(document.getElementById('gas-n').value);
+    const t = parseFloat(document.getElementById('gas-t').value);
+    
+    const filled = [!isNaN(p), !isNaN(v), !isNaN(n), !isNaN(t)];
+    const filledCount = filled.filter(Boolean).length;
+    
+    if (filledCount !== 3) {
+        gasResult.innerHTML = '<span style="color:#e74c3c">Fill exactly 3 values</span>';
+        return;
+    }
+    
+    let result = '';
+    if (isNaN(p)) {
+        const calc = (n * R * t) / v;
+        result = `P = ${calc.toFixed(4)} atm`;
+    } else if (isNaN(v)) {
+        const calc = (n * R * t) / p;
+        result = `V = ${calc.toFixed(4)} L`;
+    } else if (isNaN(n)) {
+        const calc = (p * v) / (R * t);
+        result = `n = ${calc.toFixed(4)} mol`;
+    } else {
+        const calc = (p * v) / (n * R);
+        result = `T = ${calc.toFixed(2)} K`;
+    }
+    
+    gasResult.innerHTML = `<strong>${result}</strong>`;
+});
+
+const stoichCalcBtn = document.getElementById('stoich-calc-btn');
+const stoichResult = document.getElementById('stoich-result');
+
+function getMolarMass(formula) {
+    const regex = /([A-Z][a-z]?)(\d*)/g;
+    let match;
+    let totalMass = 0;
+    
+    while ((match = regex.exec(formula)) !== null) {
+        if (match[1]) {
+            const el = elements.find(e => e.s === match[1]);
+            if (el) {
+                const count = parseInt(match[2]) || 1;
+                totalMass += el.m * count;
+            }
+        }
+    }
+    return totalMass;
+}
+
+stoichCalcBtn.addEventListener('click', () => {
+    const givenAmount = parseFloat(document.getElementById('stoich-given').value);
+    const givenUnit = document.getElementById('stoich-given-unit').value;
+    const givenFormula = document.getElementById('stoich-given-formula').value.trim();
+    const wantFormula = document.getElementById('stoich-want-formula').value.trim();
+    const ratioStr = document.getElementById('stoich-ratio').value.trim();
+    
+    if (isNaN(givenAmount) || !givenFormula || !wantFormula || !ratioStr) {
+        stoichResult.innerHTML = '<span style="color:#e74c3c">Fill all fields</span>';
+        return;
+    }
+    
+    const ratioParts = ratioStr.split(':').map(Number);
+    if (ratioParts.length !== 2 || ratioParts.some(isNaN)) {
+        stoichResult.innerHTML = '<span style="color:#e74c3c">Invalid ratio format (use X:Y)</span>';
+        return;
+    }
+    
+    const givenMM = getMolarMass(givenFormula);
+    const wantMM = getMolarMass(wantFormula);
+    
+    if (givenMM === 0 || wantMM === 0) {
+        stoichResult.innerHTML = '<span style="color:#e74c3c">Invalid formula</span>';
+        return;
+    }
+    
+    let givenMoles = givenUnit === 'mol' ? givenAmount : givenAmount / givenMM;
+    const wantMoles = givenMoles * (ratioParts[1] / ratioParts[0]);
+    const wantGrams = wantMoles * wantMM;
+    
+    stoichResult.innerHTML = `
+        <strong>${wantMoles.toFixed(4)} mol</strong> of ${wantFormula}<br>
+        <strong>${wantGrams.toFixed(4)} g</strong> of ${wantFormula}
+    `;
+});
+
+const addElementBtn = document.getElementById('add-element-btn');
+const empiricalInputs = document.getElementById('empirical-inputs');
+const empiricalCalcBtn = document.getElementById('empirical-calc-btn');
+const empiricalResult = document.getElementById('empirical-result');
+
+addElementBtn.addEventListener('click', () => {
+    const row = document.createElement('div');
+    row.className = 'empirical-row';
+    row.innerHTML = `
+        <input type="text" placeholder="Element" class="emp-element">
+        <input type="number" placeholder="Mass %" class="emp-percent" step="any">
+    `;
+    empiricalInputs.appendChild(row);
+});
+
+empiricalCalcBtn.addEventListener('click', () => {
+    const rows = empiricalInputs.querySelectorAll('.empirical-row');
+    const data = [];
+    
+    rows.forEach(row => {
+        const symbol = row.querySelector('.emp-element').value.trim();
+        const percent = parseFloat(row.querySelector('.emp-percent').value);
+        
+        if (symbol && !isNaN(percent) && percent > 0) {
+            const el = elements.find(e => e.s === symbol || e.s.toLowerCase() === symbol.toLowerCase());
+            if (el) {
+                data.push({ symbol: el.s, percent, mass: el.m });
+            }
+        }
+    });
+    
+    if (data.length < 2) {
+        empiricalResult.innerHTML = '<span style="color:#e74c3c">Enter at least 2 elements</span>';
+        return;
+    }
+    
+    const moles = data.map(d => ({ symbol: d.symbol, moles: d.percent / d.mass }));
+    const minMoles = Math.min(...moles.map(m => m.moles));
+    const ratios = moles.map(m => ({ symbol: m.symbol, ratio: m.moles / minMoles }));
+    
+    const rounded = ratios.map(r => {
+        let ratio = r.ratio;
+        for (let mult = 1; mult <= 6; mult++) {
+            if (Math.abs(ratio * mult - Math.round(ratio * mult)) < 0.1) {
+                return { symbol: r.symbol, count: Math.round(ratio * mult) };
+            }
+        }
+        return { symbol: r.symbol, count: Math.round(ratio) };
+    });
+    
+    const gcdVal = rounded.reduce((a, b) => gcd(a, b.count), rounded[0].count);
+    const simplified = rounded.map(r => ({ symbol: r.symbol, count: r.count / gcdVal }));
+    
+    const formula = simplified.map(s => s.count === 1 ? s.symbol : `${s.symbol}${s.count}`).join('');
+    
+    empiricalResult.innerHTML = `<strong>Empirical Formula: ${formula}</strong>`;
+});

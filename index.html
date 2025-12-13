@@ -171,6 +171,56 @@
                 <button id="molarity-calc-btn">Calculate Molarity</button>
                 <div id="molarity-result"></div>
             </div>
+
+            <div class="tool-card" id="gas-law-tool">
+                <h4>Ideal Gas Law (PV=nRT)</h4>
+                <div class="gas-inputs">
+                    <input type="number" id="gas-p" placeholder="P (atm)" step="any">
+                    <input type="number" id="gas-v" placeholder="V (L)" step="any">
+                    <input type="number" id="gas-n" placeholder="n (mol)" step="any">
+                    <input type="number" id="gas-t" placeholder="T (K)" step="any">
+                </div>
+                <p class="tool-hint">R = 0.0821 L·atm/(mol·K)</p>
+                <button id="gas-calc-btn">Calculate Missing</button>
+                <div id="gas-result"></div>
+            </div>
+
+            <div class="tool-card" id="stoich-tool">
+                <h4>Stoichiometry Calculator</h4>
+                <input type="number" id="stoich-given" placeholder="Given amount" step="any">
+                <select id="stoich-given-unit">
+                    <option value="g">grams</option>
+                    <option value="mol">moles</option>
+                </select>
+                <input type="text" id="stoich-given-formula" placeholder="Given formula (e.g., H2O)">
+                <div class="stoich-arrow">converts to</div>
+                <input type="text" id="stoich-want-formula" placeholder="Want formula (e.g., O2)">
+                <input type="text" id="stoich-ratio" placeholder="Mole ratio (e.g., 2:1)">
+                <button id="stoich-calc-btn">Calculate</button>
+                <div id="stoich-result"></div>
+            </div>
+
+            <div class="tool-card" id="empirical-tool">
+                <h4>Empirical Formula Calculator</h4>
+                <p class="tool-hint">Enter mass percentages</p>
+                <div class="empirical-inputs" id="empirical-inputs">
+                    <div class="empirical-row">
+                        <input type="text" placeholder="Element (e.g., C)" class="emp-element">
+                        <input type="number" placeholder="Mass %" class="emp-percent" step="any">
+                    </div>
+                    <div class="empirical-row">
+                        <input type="text" placeholder="Element (e.g., H)" class="emp-element">
+                        <input type="number" placeholder="Mass %" class="emp-percent" step="any">
+                    </div>
+                    <div class="empirical-row">
+                        <input type="text" placeholder="Element (e.g., O)" class="emp-element">
+                        <input type="number" placeholder="Mass %" class="emp-percent" step="any">
+                    </div>
+                </div>
+                <button id="add-element-btn">+ Add Element</button>
+                <button id="empirical-calc-btn">Calculate Formula</button>
+                <div id="empirical-result"></div>
+            </div>
         </div>
     </div>
 

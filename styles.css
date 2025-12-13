@@ -1734,3 +1734,78 @@ body.dark .oxidation-rules ul {
 .games-link:hover {
     background: #d68910;
 }
+
+
+.gas-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tool-hint {
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.stoich-arrow {
+    text-align: center;
+    color: #3498db;
+    font-size: 13px;
+    margin: 8px 0;
+}
+
+.empirical-inputs {
+    margin-bottom: 10px;
+}
+
+.empirical-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.empirical-row input {
+    flex: 1;
+}
+
+#add-element-btn {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    background: #ecf0f1;
+    border: 1px dashed #bdc3c7;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #7f8c8d;
+    font-size: 13px;
+}
+
+body.dark #add-element-btn {
+    background: #1a1a2e;
+    border-color: #444;
+    color: #888;
+}
+
+#add-element-btn:hover {
+    background: #bdc3c7;
+    color: #2c3e50;
+}
+
+body.dark #add-element-btn:hover {
+    background: #444;
+    color: #eee;
+}
+
+@media (max-width: 600px) {
+    .gas-inputs {
+        grid-template-columns: 1fr;
+    }
+    
+    .empirical-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
