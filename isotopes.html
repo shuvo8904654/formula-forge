@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isotope Explorer</title>
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <header>
+        <h1>Isotope Explorer</h1>
+        <p class="subtitle">Discover the different isotopes of each element</p>
+        <a href="index.html" class="back-link">Back to Periodic Table</a>
+    </header>
+
+    <div class="controls">
+        <select id="element-select"></select>
+        <button id="dark-toggle">Dark Mode</button>
+    </div>
+
+    <div class="content-section">
+        <div id="element-header"></div>
+        <div id="isotopes-list"></div>
+    </div>
+
+    <div class="facts-section">
+        <h3>About Isotopes</h3>
+        <ul>
+            <li>Isotopes are atoms of the same element with different numbers of neutrons</li>
+            <li>All isotopes of an element have the same number of protons</li>
+            <li>Stable isotopes do not undergo radioactive decay</li>
+            <li>Radioactive isotopes decay over time, measured by half-life</li>
+            <li>Carbon-14 dating uses the decay of C-14 to determine age of organic materials</li>
+            <li>Some elements have no stable isotopes (like technetium and promethium)</li>
+        </ul>
+    </div>
+
+    <script src="isotopes.js"></script>
+</body>
+</html>
