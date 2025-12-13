@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Games</title>
+    <link rel="stylesheet" href="games.css">
+</head>
+<body>
+    <header>
+        <h1>Element Games</h1>
+        <p class="subtitle">Learn the periodic table while having fun</p>
+        <a href="index.html" class="back-link">Back to Periodic Table</a>
+    </header>
+
+    <div class="controls">
+        <button id="dark-toggle">Dark Mode</button>
+    </div>
+
+    <div class="game-tabs">
+        <button class="tab-btn active" data-game="memory">Memory Match</button>
+        <button class="tab-btn" data-game="hangman">Hangman</button>
+        <button class="tab-btn" data-game="flashcards">Flashcards</button>
+        <button class="tab-btn" data-game="speed">Speed Challenge</button>
+    </div>
+
+    <div id="memory-game" class="game-container active">
+        <div class="game-header">
+            <h3>Memory Match</h3>
+            <p>Match element symbols with their names</p>
+            <div class="game-stats">
+                <span>Moves: <strong id="memory-moves">0</strong></span>
+                <span>Pairs: <strong id="memory-pairs">0</strong>/8</span>
+                <span>Time: <strong id="memory-time">0:00</strong></span>
+            </div>
+            <button id="memory-restart">New Game</button>
+        </div>
+        <div id="memory-board"></div>
+    </div>
+
+    <div id="hangman-game" class="game-container">
+        <div class="game-header">
+            <h3>Element Hangman</h3>
+            <p>Guess the element name letter by letter</p>
+            <div class="game-stats">
+                <span>Score: <strong id="hangman-score">0</strong></span>
+                <span>Streak: <strong id="hangman-streak">0</strong></span>
+            </div>
+        </div>
+        <div class="hangman-display">
+            <div id="hangman-figure"></div>
+            <div id="hangman-word"></div>
+            <div id="hangman-hint"></div>
+        </div>
+        <div id="hangman-keyboard"></div>
+        <div id="hangman-result"></div>
+        <button id="hangman-next" style="display:none;">Next Element</button>
+    </div>
+
+    <div id="flashcards-game" class="game-container">
+        <div class="game-header">
+            <h3>Flashcards</h3>
+            <p>Click the card to flip and reveal the answer</p>
+            <div class="game-stats">
+                <span>Card: <strong id="flash-current">1</strong>/<strong id="flash-total">20</strong></span>
+                <span>Known: <strong id="flash-known">0</strong></span>
+            </div>
+        </div>
+        <div class="flashcard-container">
+            <div class="flashcard" id="flashcard">
+                <div class="flashcard-front" id="flash-front"></div>
+                <div class="flashcard-back" id="flash-back"></div>
+            </div>
+        </div>
+        <div class="flashcard-controls">
+            <button id="flash-dont-know" class="btn-red">Don't Know</button>
+            <button id="flash-know" class="btn-green">Know It</button>
+        </div>
+        <button id="flash-restart">Restart Deck</button>
+    </div>
+
+    <div id="speed-game" class="game-container">
+        <div class="game-header">
+            <h3>Speed Challenge</h3>
+            <p>Type the element name as fast as you can</p>
+            <div class="game-stats">
+                <span>Score: <strong id="speed-score">0</strong></span>
+                <span>Time: <strong id="speed-time">60</strong>s</span>
+                <span>Best: <strong id="speed-best">0</strong></span>
+            </div>
+        </div>
+        <div id="speed-display">
+            <div id="speed-symbol"></div>
+            <input type="text" id="speed-input" placeholder="Type element name..." autocomplete="off">
+            <div id="speed-feedback"></div>
+        </div>
+        <button id="speed-start">Start Game</button>
+    </div>
+
+    <script src="games.js"></script>
+</body>
+</html>
