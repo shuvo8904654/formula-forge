@@ -966,3 +966,151 @@ trendBtns.forEach(btn => {
 
 trendArrows.innerHTML = trendData.none.arrows;
 trendExplanation.textContent = trendData.none.explanation;
+
+
+const oxidationInput = document.getElementById('oxidation-input');
+const oxidationBtn = document.getElementById('oxidation-btn');
+const oxidationResult = document.getElementById('oxidation-result');
+
+const knownOxidationStates = {
+    'H': 1, 'Li': 1, 'Na': 1, 'K': 1, 'Rb': 1, 'Cs': 1, 'Fr': 1,
+    'Be': 2, 'Mg': 2, 'Ca': 2, 'Sr': 2, 'Ba': 2, 'Ra': 2,
+    'F': -1, 'O': -2, 'Cl': -1, 'Br': -1, 'I': -1,
+    'Al': 3, 'Zn': 2, 'Ag': 1
+};
+
+const elementNames = {};
+elements.forEach(el => { elementNames[el.s] = el.name; });
+
+function parseCompoundForOxidation(compound) {
+    const parts = [];
+    const regex = /([A-Z][a-z]?)(\d*)/g;
+    let match;
+    
+    while ((match = regex.exec(compound)) !== null) {
+        if (match[1]) {
+            parts.push({
+                symbol: match[1],
+                count: parseInt(match[2]) || 1
+            });
+        }
+    }
+    return parts;
+}
+
+function findOxidationStates(compound) {
+    const parts = parseCompoundForOxidation(compound);
+    if (parts.length === 0) return null;
+    
+    const results = [];
+    let unknownElement = null;
+    let unknownCount = 0;
+    let knownSum = 0;
+    
+    for (const part of parts) {
+        if (knownOxidationStates[part.symbol] !== undefined) {
+            const state = knownOxidationStates[part.symbol];
+            results.push({ symbol: part.symbol, count: part.count, state: state });
+            knownSum += state * part.count;
+        } else {
+            if (unknownElement === null) {
+                unknownElement = part.symbol;
+                unknownCount = part.count;
+            } else {
+                const state = solveForElement(parts, part.symbol);
+                results.push({ symbol: part.symbol, count: part.count, state: state });
+            }
+        }
+    }
+    
+    if (unknownElement !== null) {
+        const unknownState = -knownSum / unknownCount;
+        results.push({ symbol: unknownElement, count: unknownCount, state: unknownState });
+    }
+    
+    results.sort((a, b) => {
+        const orderA = parts.findIndex(p => p.symbol === a.symbol);
+        const orderB = parts.findIndex(p => p.symbol === b.symbol);
+        return orderA - orderB;
+    });
+    
+    return results;
+}
+
+function solveForElement(parts, targetSymbol) {
+    let knownSum = 0;
+    let targetCount = 0;
+    
+    for (const part of parts) {
+        if (part.symbol === targetSymbol) {
+            targetCount = part.count;
+        } else if (knownOxidationStates[part.symbol] !== undefined) {
+            knownSum += knownOxidationStates[part.symbol] * part.count;
+        }
+    }
+    
+    return targetCount > 0 ? -knownSum / targetCount : 0;
+}
+
+function formatOxidationState(state) {
+    if (state === 0) return '0';
+    const sign = state > 0 ? '+' : '';
+    if (Number.isInteger(state)) {
+        return sign + state;
+    }
+    return sign + state.toFixed(2);
+}
+
+function displayOxidationResults(compound, results) {
+    if (!results || results.length === 0) {
+        oxidationResult.innerHTML = '<p class="error">Could not parse compound. Check your input.</p>';
+        return;
+    }
+    
+    let compoundHtml = '';
+    results.forEach(r => {
+        compoundHtml += r.count > 1 ? `${r.symbol}<sub>${r.count}</sub>` : r.symbol;
+    });
+    
+    let statesHtml = '';
+    results.forEach(r => {
+        const stateClass = r.state > 0 ? 'positive' : (r.state < 0 ? 'negative' : 'zero');
+        statesHtml += `
+            <div class="state-card">
+                <div class="element-sym">${r.symbol}</div>
+                <div class="state-value ${stateClass}">${formatOxidationState(r.state)}</div>
+            </div>
+        `;
+    });
+    
+    let sum = 0;
+    results.forEach(r => { sum += r.state * r.count; });
+    const verified = Math.abs(sum) < 0.001;
+    
+    oxidationResult.innerHTML = `
+        <div class="compound-display">${compoundHtml}</div>
+        <div class="oxidation-states">${statesHtml}</div>
+        ${verified ? '<div class="verification">Sum of oxidation states = 0 (Verified)</div>' : ''}
+    `;
+}
+
+oxidationBtn.addEventListener('click', () => {
+    const compound = oxidationInput.value.trim();
+    if (!compound) {
+        oxidationResult.innerHTML = '<p class="error">Please enter a compound</p>';
+        return;
+    }
+    const results = findOxidationStates(compound);
+    displayOxidationResults(compound, results);
+});
+
+oxidationInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') oxidationBtn.click();
+});
+
+document.querySelectorAll('.ox-example-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        oxidationInput.value = btn.dataset.compound;
+        oxidationBtn.click();
+    });
+});
