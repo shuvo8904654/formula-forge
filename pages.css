@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #f4f1eb;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+    background: #1a1a2e;
+    color: #eee;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+h1 {
+    color: #2c3e50;
+    font-weight: normal;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+body.dark h1 { color: #ecf0f1; }
+
+.subtitle {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+body.dark .subtitle { color: #aaa; }
+
+.back-link {
+    display: inline-block;
+    color: #3498db;
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid #3498db;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.back-link:hover {
+    background: #3498db;
+    color: white;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.controls select, .controls input, .controls button {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+body.dark .controls select, body.dark .controls input {
+    background: #2d2d44;
+    color: #eee;
+    border-color: #444;
+}
+
+.controls button {
+    background: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.controls button:hover { background: #2980b9; }
+
+.chart-container, .content-section, .facts-section {
+    max-width: 900px;
+    margin: 0 auto 25px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+body.dark .chart-container, body.dark .content-section, body.dark .facts-section {
+    background: #2d2d44;
+}
+
+h3 {
+    color: #2c3e50;
+    font-weight: normal;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+body.dark h3 { color: #ecf0f1; }
+
+.bar-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.bar-label {
+    width: 50px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+body.dark .bar-label { color: #ecf0f1; }
+
+.bar-track {
+    flex: 1;
+    height: 25px;
+    background: #ecf0f1;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+body.dark .bar-track { background: #1a1a2e; }
+
+.bar-fill {
+    height: 100%;
+    border-radius: 12px;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    color: white;
+    font-size: 11px;
+    min-width: 30px;
+}
+
+.bar-value {
+    width: 80px;
+    text-align: right;
+    font-size: 13px;
+    color: #666;
+}
+
+body.dark .bar-value { color: #aaa; }
+
+
+.facts-section ul, .content-section ul {
+    margin-left: 20px;
+    line-height: 1.8;
+    color: #555;
+}
+
+body.dark .facts-section ul, body.dark .content-section ul { color: #bbb; }
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+body.dark .card { background: #1a1a2e; }
+
+.card h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+body.dark .card h4 { color: #ecf0f1; }
+
+.card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+body.dark .card p { color: #aaa; }
+
+.isotope-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+body.dark .isotope-card { background: #1a1a2e; }
+
+.isotope-card .mass-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3498db;
+}
+
+.isotope-card .abundance {
+    color: #27ae60;
+    font-size: 14px;
+}
+
+.isotope-card .half-life {
+    color: #e74c3c;
+    font-size: 13px;
+}
+
+.isotope-card .stable {
+    color: #27ae60;
+}
+
+.safety-category {
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.safety-category.danger {
+    background: #fdecea;
+    border-left: 4px solid #e74c3c;
+}
+
+body.dark .safety-category.danger { background: #3d2020; }
+
+.safety-category.warning {
+    background: #fef9e7;
+    border-left: 4px solid #f39c12;
+}
+
+body.dark .safety-category.warning { background: #3d3520; }
+
+.safety-category.info {
+    background: #eaf2f8;
+    border-left: 4px solid #3498db;
+}
+
+body.dark .safety-category.info { background: #203040; }
+
+.safety-category h4 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+body.dark .safety-category h4 { color: #ecf0f1; }
+
+.solubility-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    overflow-x: auto;
+    display: block;
+}
+
+.solubility-table th, .solubility-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+body.dark .solubility-table th, body.dark .solubility-table td {
+    border-color: #444;
+}
+
+.solubility-table th {
+    background: #3498db;
+    color: white;
+}
+
+.solubility-table td.soluble {
+    background: #d5f5e3;
+    color: #27ae60;
+}
+
+body.dark .solubility-table td.soluble { background: #1e3a2f; }
+
+.solubility-table td.insoluble {
+    background: #fadbd8;
+    color: #e74c3c;
+}
+
+body.dark .solubility-table td.insoluble { background: #3d2020; }
+
+.solubility-table td.slightly {
+    background: #fef9e7;
+    color: #f39c12;
+}
+
+body.dark .solubility-table td.slightly { background: #3d3520; }
+
+.legend-box {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.legend-color.soluble { background: #27ae60; }
+.legend-color.insoluble { background: #e74c3c; }
+.legend-color.slightly { background: #f39c12; }
+
+@media (max-width: 600px) {
+    .controls { flex-direction: column; align-items: stretch; }
+    .controls select, .controls button { width: 100%; }
+    .bar-label { width: 35px; font-size: 12px; }
+    .bar-value { width: 60px; font-size: 11px; }
+    h1 { font-size: 22px; }
+    .grid-2 { grid-template-columns: 1fr; }
+}
