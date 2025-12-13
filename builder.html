@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula Builder</title>
+    <link rel="stylesheet" href="builder.css">
+</head>
+<body>
+    <header>
+        <h1>Formula Builder</h1>
+        <p class="subtitle">Click elements to build molecules</p>
+        <a href="index.html" class="back-link">Back to Periodic Table</a>
+    </header>
+
+    <div class="builder-container">
+        <div class="workspace-section">
+            <div class="formula-display">
+                <h3>Your Formula</h3>
+                <div id="formula-output">Click elements below to start</div>
+                <div class="formula-actions">
+                    <button id="clear-btn">Clear</button>
+                    <button id="undo-btn">Undo</button>
+                </div>
+            </div>
+
+            <div class="formula-info">
+                <div class="info-card">
+                    <span class="info-label">Molar Mass</span>
+                    <span class="info-value" id="molar-mass">0 g/mol</span>
+                </div>
+                <div class="info-card">
+                    <span class="info-label">Total Atoms</span>
+                    <span class="info-value" id="total-atoms">0</span>
+                </div>
+                <div class="info-card">
+                    <span class="info-label">Elements Used</span>
+                    <span class="info-value" id="elements-used">0</span>
+                </div>
+            </div>
+
+            <div class="composition-section">
+                <h4>Composition by Mass</h4>
+                <div id="composition-bars"></div>
+            </div>
+        </div>
+
+        <div class="common-compounds">
+            <h3>Common Compounds</h3>
+            <div class="compounds-grid">
+                <button class="compound-btn" data-formula="H2O">H2O - Water</button>
+                <button class="compound-btn" data-formula="NaCl">NaCl - Salt</button>
+                <button class="compound-btn" data-formula="CO2">CO2 - Carbon Dioxide</button>
+                <button class="compound-btn" data-formula="H2SO4">H2SO4 - Sulfuric Acid</button>
+                <button class="compound-btn" data-formula="NaOH">NaOH - Sodium Hydroxide</button>
+                <button class="compound-btn" data-formula="C6H12O6">C6H12O6 - Glucose</button>
+                <button class="compound-btn" data-formula="NH3">NH3 - Ammonia</button>
+                <button class="compound-btn" data-formula="CH4">CH4 - Methane</button>
+                <button class="compound-btn" data-formula="CaCO3">CaCO3 - Calcium Carbonate</button>
+                <button class="compound-btn" data-formula="Fe2O3">Fe2O3 - Rust</button>
+                <button class="compound-btn" data-formula="C2H5OH">C2H5OH - Ethanol</button>
+                <button class="compound-btn" data-formula="HCl">HCl - Hydrochloric Acid</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="elements-palette">
+        <div class="palette-controls">
+            <input type="text" id="element-search" placeholder="Search elements...">
+            <select id="category-select">
+                <option value="all">All Elements</option>
+                <option value="common">Common Elements</option>
+                <option value="nonmetal">Nonmetals</option>
+                <option value="metal">Metals</option>
+                <option value="halogen">Halogens</option>
+            </select>
+            <button id="dark-toggle">Dark Mode</button>
+        </div>
+        <div id="elements-grid"></div>
+    </div>
+
+    <script src="builder.js"></script>
+</body>
+</html>
