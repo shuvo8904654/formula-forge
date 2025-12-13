@@ -1,0 +1,388 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #f4f1eb;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark { background: #1a1a2e; color: #eee; }
+
+header { text-align: center; margin-bottom: 20px; }
+
+h1 { color: #2c3e50; font-weight: normal; font-size: 28px; margin-bottom: 8px; }
+body.dark h1 { color: #ecf0f1; }
+
+.subtitle { color: #666; font-size: 15px; margin-bottom: 12px; }
+body.dark .subtitle { color: #aaa; }
+
+.back-link {
+    display: inline-block;
+    color: #3498db;
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid #3498db;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.back-link:hover { background: #3498db; color: white; }
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.controls button {
+    padding: 10px 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.controls button:hover { background: #2980b9; }
+
+.game-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    border: 2px solid #3498db;
+    background: white;
+    color: #3498db;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+body.dark .tab-btn { background: #2d2d44; }
+
+.tab-btn:hover, .tab-btn.active {
+    background: #3498db;
+    color: white;
+}
+
+.game-container {
+    display: none;
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+body.dark .game-container { background: #2d2d44; }
+
+.game-container.active { display: block; }
+
+.game-header { text-align: center; margin-bottom: 25px; }
+
+.game-header h3 { color: #2c3e50; font-weight: normal; margin-bottom: 8px; }
+body.dark .game-header h3 { color: #ecf0f1; }
+
+.game-header p { color: #888; font-size: 14px; margin-bottom: 15px; }
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.game-stats span { color: #666; font-size: 14px; }
+body.dark .game-stats span { color: #aaa; }
+
+.game-stats strong { color: #3498db; }
+
+.game-header button {
+    padding: 10px 25px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.game-header button:hover { background: #2980b9; }
+
+
+#memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    background: #3498db;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+    transition: transform 0.3s, background 0.3s;
+    user-select: none;
+}
+
+.memory-card:hover { transform: scale(1.05); }
+
+.memory-card.flipped {
+    background: #f8f9fa;
+    color: #2c3e50;
+}
+
+body.dark .memory-card.flipped { background: #1a1a2e; color: #ecf0f1; }
+
+.memory-card.matched {
+    background: #27ae60;
+    color: white;
+    cursor: default;
+}
+
+.memory-card .card-content { display: none; }
+.memory-card.flipped .card-content, .memory-card.matched .card-content { display: block; }
+.memory-card .card-back { display: block; }
+.memory-card.flipped .card-back, .memory-card.matched .card-back { display: none; }
+
+.hangman-display { text-align: center; margin-bottom: 25px; }
+
+#hangman-figure {
+    font-size: 40px;
+    margin-bottom: 20px;
+    min-height: 50px;
+}
+
+#hangman-word {
+    font-size: 32px;
+    letter-spacing: 8px;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+body.dark #hangman-word { color: #ecf0f1; }
+
+#hangman-hint {
+    color: #888;
+    font-size: 14px;
+    font-style: italic;
+}
+
+#hangman-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 500px;
+    margin: 0 auto 20px;
+}
+
+.key-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background: #ecf0f1;
+    color: #2c3e50;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+body.dark .key-btn { background: #1a1a2e; color: #eee; }
+
+.key-btn:hover:not(:disabled) { background: #3498db; color: white; }
+
+.key-btn:disabled { opacity: 0.3; cursor: default; }
+
+.key-btn.correct { background: #27ae60; color: white; }
+.key-btn.wrong { background: #e74c3c; color: white; }
+
+#hangman-result {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+    min-height: 30px;
+}
+
+#hangman-result.win { color: #27ae60; }
+#hangman-result.lose { color: #e74c3c; }
+
+#hangman-next {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 30px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#hangman-next:hover { background: #219a52; }
+
+.flashcard-container {
+    perspective: 1000px;
+    margin: 0 auto 25px;
+    width: 300px;
+    height: 200px;
+}
+
+.flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+.flashcard.flipped { transform: rotateY(180deg); }
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.flashcard-front {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.flashcard-back {
+    background: #f8f9fa;
+    color: #2c3e50;
+    transform: rotateY(180deg);
+    font-size: 24px;
+}
+
+body.dark .flashcard-back { background: #1a1a2e; color: #ecf0f1; }
+
+.flashcard-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.flashcard-controls button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+}
+
+.btn-red { background: #e74c3c; }
+.btn-red:hover { background: #c0392b; }
+.btn-green { background: #27ae60; }
+.btn-green:hover { background: #219a52; }
+
+#flash-restart {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 25px;
+    background: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#flash-restart:hover { background: #7f8c8d; }
+
+#speed-display { text-align: center; margin-bottom: 25px; }
+
+#speed-symbol {
+    font-size: 72px;
+    font-weight: bold;
+    color: #3498db;
+    margin-bottom: 20px;
+    min-height: 90px;
+}
+
+#speed-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+body.dark #speed-input { background: #1a1a2e; color: #eee; border-color: #444; }
+
+#speed-input:focus { outline: none; border-color: #3498db; }
+
+#speed-feedback {
+    font-size: 16px;
+    min-height: 25px;
+}
+
+#speed-feedback.correct { color: #27ae60; }
+#speed-feedback.wrong { color: #e74c3c; }
+
+#speed-start {
+    display: block;
+    margin: 0 auto;
+    padding: 15px 40px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#speed-start:hover { background: #219a52; }
+#speed-start:disabled { background: #95a5a6; cursor: default; }
+
+@media (max-width: 500px) {
+    #memory-board { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .memory-card { font-size: 14px; }
+    .key-btn { width: 32px; height: 32px; font-size: 14px; }
+    #hangman-word { font-size: 24px; letter-spacing: 5px; }
+    .flashcard-container { width: 260px; height: 170px; }
+    .flashcard-front { font-size: 36px; }
+    .flashcard-back { font-size: 20px; }
+    #speed-symbol { font-size: 56px; }
+    .game-tabs { gap: 5px; }
+    .tab-btn { padding: 10px 15px; font-size: 12px; }
+}
