@@ -1725,3 +1725,12 @@ body.dark .oxidation-rules ul {
 .solubility-link:hover {
     background: #2980b9;
 }
+
+
+.games-link {
+    background: #f39c12;
+}
+
+.games-link:hover {
+    background: #d68910;
+}
