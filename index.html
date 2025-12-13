@@ -189,7 +189,40 @@
         </div>
         <div class="trend-arrows" id="trend-arrows"></div>
         <div class="trend-explanation" id="trend-explanation"></div>
-    </div>button a
+    </div>
+
+    <div id="oxidation-finder">
+        <h3>Oxidation State Finder</h3>
+        <p class="tool-subtitle">Enter a compound to find oxidation states of each element</p>
+        <div class="oxidation-input-row">
+            <input type="text" id="oxidation-input" placeholder="Enter compound (e.g., H2SO4, KMnO4)">
+            <button id="oxidation-btn">Find States</button>
+        </div>
+        <div id="oxidation-result"></div>
+        <div class="oxidation-examples">
+            <p>Try these:</p>
+            <button class="ox-example-btn" data-compound="H2O">H2O</button>
+            <button class="ox-example-btn" data-compound="H2SO4">H2SO4</button>
+            <button class="ox-example-btn" data-compound="KMnO4">KMnO4</button>
+            <button class="ox-example-btn" data-compound="Na2CO3">Na2CO3</button>
+            <button class="ox-example-btn" data-compound="Fe2O3">Fe2O3</button>
+            <button class="ox-example-btn" data-compound="HNO3">HNO3</button>
+            <button class="ox-example-btn" data-compound="CaCl2">CaCl2</button>
+            <button class="ox-example-btn" data-compound="K2Cr2O7">K2Cr2O7</button>
+        </div>
+        <div class="oxidation-rules">
+            <h4>Common Oxidation State Rules</h4>
+            <ul>
+                <li>Free elements have oxidation state of 0</li>
+                <li>H is usually +1 (except in metal hydrides: -1)</li>
+                <li>O is usually -2 (except in peroxides: -1)</li>
+                <li>Alkali metals (Group 1) are always +1</li>
+                <li>Alkaline earth metals (Group 2) are always +2</li>
+                <li>Halogens are usually -1 (except with O or other halogens)</li>
+                <li>Sum of oxidation states equals charge of species</li>
+            </ul>
+        </div>
+    </div>
 
     <div id="modal" class="modal">
         <div class="modal-content">
