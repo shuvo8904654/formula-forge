@@ -1429,3 +1429,12 @@ body.dark .trend-explanation {
 .nav-link:hover {
     background: #8e44ad;
 }
+
+
+.builder-link {
+    background: #27ae60;
+}
+
+.builder-link:hover {
+    background: #219a52;
+}
